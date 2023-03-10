@@ -97,6 +97,14 @@ const deleteTour = (req, res) => {
   });
 };
 
+app.route("/api/v1/tours").get(getAllTours).get(getTour).post(createTour);
+
+app
+  .route("/api/v1/tours/:id")
+  .get(getTour)
+  .patch(updateTour)
+  .delete(deleteTour);
+
 app.get("/api/v1/tours/", getAllTours);
 
 app.get("/api/v1/tours/:id?", getTour);
