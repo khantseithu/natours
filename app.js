@@ -9,6 +9,11 @@ app.use((req, res, next) => {
   console.log("Helloo from the middleware!");
   next();
 });
+
+app.use((req, res, next) => {
+  req.requestTime = new Date().toISOString();
+  next();
+});
 // app.get("/", (req, res) => {
 //   res.status(200).json({ message: "Hello World!", app: "natours" });
 // });
@@ -22,7 +27,9 @@ const tours = JSON.parse(
 );
 
 const getAllTours = (req, res) => {
+  console.log(req.requestTime);
   res.status(200).json({
+    createAt: req.requestTime,
     status: "success",
     results: tours.length,
     data: {
