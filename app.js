@@ -5,6 +5,10 @@ const PORT = 3000;
 
 app.use(express.json());
 
+app.use((req, res, next) => {
+  console.log("Helloo from the middleware!");
+  next();
+});
 // app.get("/", (req, res) => {
 //   res.status(200).json({ message: "Hello World!", app: "natours" });
 // });
