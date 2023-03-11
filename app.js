@@ -1,8 +1,11 @@
 const express = require("express");
 const fs = require("fs");
-const app = express();
-const PORT = 3000;
+const morgan = require("morgan");
 
+const app = express();
+
+// Middleware
+app.use(morgan("dev"));
 app.use(express.json());
 
 app.use((req, res, next) => {
@@ -26,6 +29,7 @@ const tours = JSON.parse(
   fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`, "utf-8")
 );
 
+// Route Handlers
 const getAllTours = (req, res) => {
   console.log(req.requestTime);
   res.status(200).json({
@@ -108,6 +112,7 @@ const deleteTour = (req, res) => {
   });
 };
 
+// routes
 app.route("/api/v1/tours").get(getAllTours).get(getTour).post(createTour);
 
 app
@@ -126,6 +131,9 @@ app.patch("/api/v1/tours/:id", updateTour);
 
 app.delete("/api/v1/tours/:id", deleteTour);
 
+// server start
+
+const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
 });
