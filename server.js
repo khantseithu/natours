@@ -12,10 +12,7 @@ mongoose.connect(DB, {
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false
-}).then(con => {
-  console.log(con.connections)
-  console.log('DB connection successful!')
-}) // return a promise
+}).then(() => console.log('DB connection successful!')) // return a promise
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
