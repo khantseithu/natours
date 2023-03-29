@@ -14,6 +14,23 @@ mongoose.connect(DB, {
   useFindAndModify: false
 }).then(() => console.log('DB connection successful!')) // return a promise
 
+const tourSchema = new mongoose.Schema({
+  name: {
+    type: String, 
+    required: [true, "a tour must have a name"]},
+    unique: true,
+  rating: {
+    type: Number,
+    default: 4.5
+  },
+  price: {
+    type: Number,
+    required: [true, "a tour must have a value"]
+  }
+})
+
+const Tour = mongoose.model('Tour', tourSchema)
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
