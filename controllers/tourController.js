@@ -30,12 +30,13 @@ const Tour = require('./../models/tourModel')
 exports.getAllTours = async (req, res) => {
   try {
     // EXECUTE QUERY
-    const features = new APIFeatures(Tour.find(), req.query)
-      .filter()
-      .sort()
-      .limitFields()
-      .paginate();
-    const tours = await features.query;
+    // const features = new APIFeatures(Tour.find(), req.query)
+    //   .filter()
+    //   .sort()
+    //   .limitFields()
+    //   .paginate();
+    // const tours = await features.query;
+    const tours = await Tour.find();
 
     // SEND RESPONSE
     res.status(200).json({
